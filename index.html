@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signet — agents do the work, you keep the say-so</title>
+  <meta name="description" content="Signet is a decision ledger for personal AI agents. Consequential actions wait for your approval on your phone; every decision is sealed into a permanent record." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Signet" />
+  <meta property="og:title" content="Signet — agents do the work, you keep the say-so" />
+  <meta property="og:description" content="A decision ledger for personal AI agents. Consequential actions wait for your seal; every decision goes on the record." />
+  <meta property="og:url" content="https://signet.syahi.sh/" />
+  <meta property="og:image" content="https://signet.syahi.sh/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="A circular seal mark with a serrated edge and the letter S, above the words: Agents do the work. You keep the say-so. Signet, a decision ledger." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Signet — agents do the work, you keep the say-so" />
+  <meta name="twitter:description" content="A decision ledger for personal AI agents. Consequential actions wait for your seal; every decision goes on the record." />
+  <meta name="twitter:image" content="https://signet.syahi.sh/og.png" />
+  <meta name="twitter:image:alt" content="A circular seal mark with a serrated edge and the letter S, above the words: Agents do the work. You keep the say-so. Signet, a decision ledger." />
+  <link rel="canonical" href="https://signet.syahi.sh/" />
+  <meta name="theme-color" content="#F0E8D2" />
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23221A0E'/%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='%23F0E8D2' stroke-width='2' stroke-dasharray='2.6 2.4'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23F0E8D2' stroke-width='1.5'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='27' fill='%23F0E8D2'%3ES%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" />
+
+  <style>
+     
+    :root {
+      --paper:          #F0E8D2;
+      --surface:        #FAF4E2;
+      --territory:      #E2D5B0;
+      --ink:            #221A0E;
+      --dock:           #221A0E;
+      --muted:          #6B5A3E;
+      --walnut:         #5C4A2E;
+      --copper-text:    #8A4E1D;
+      --copper-graphic: #B06325;
+      --copper-glow:    #E8B872;
+      --nav-inactive:   #A0906E;
+
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans:  "Inter", ui-sans-serif, system-ui, sans-serif;
+      --mono:  "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--copper-text); }
+
+    :focus-visible {
+      outline: 2px solid var(--copper-graphic);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      max-width: 46rem;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .seal { display: block; }
+
+    header {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--territory);
+    }
+    header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      color: var(--ink);
+      text-decoration: none;
+       
+      padding: 0.55rem 0.25rem;
+      margin: -0.55rem -0.25rem;
+    }
+    .byline {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding-top: 4.5rem;
+      padding-bottom: 3.5rem;
+      position: relative;
+      overflow: visible;
+    }
+     
+    .hero-watermark {
+      position: absolute;
+      top: 1.5rem;
+      right: -4rem;
+      width: 22rem;
+      height: 22rem;
+      pointer-events: none;
+    }
+    @media (max-width: 900px) { .hero-watermark { display: none; } }
+    .hero > * { position: relative; }
+    .hero-watermark { position: absolute; }  
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--copper-text);
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(2.6rem, 8vw, 4.4rem);
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      text-wrap: balance;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--copper-text);
+    }
+    .hero p.lede {
+      margin-top: 1.5rem;
+      max-width: 34rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .ledger {
+      margin: 3rem 0 0;
+      background: var(--surface);
+      border: 1px solid var(--territory);
+      position: relative;
+    }
+    .ledger-head {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--territory);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .ledger ol { list-style: none; }
+    .ledger li {
+      display: grid;
+      grid-template-columns: 3.4rem 1fr auto;
+      gap: 0.75rem;
+      align-items: baseline;
+      padding: 0.85rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+    .ledger li + li { border-top: 1px dashed var(--territory); }
+     
+    .ledger li:last-child { padding-right: 6rem; }
+    .ledger .t { color: var(--muted); }
+    .ledger .who { color: var(--walnut); }
+    .ledger .status {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .ledger .status.sealed { color: var(--copper-text); font-weight: 500; }
+
+    .stamp {
+      position: absolute;
+      right: -1rem;
+      bottom: -1.6rem;
+      width: 5.2rem;
+      height: 5.2rem;
+      border-radius: 50%;
+      border: 2px dashed var(--copper-graphic);
+      color: var(--copper-text);
+      background: var(--paper);
+      display: grid;
+      place-content: center;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.625rem;  
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 1.7;
+      transform: rotate(-8deg);
+      box-shadow: 0 1px 0 var(--territory);
+    }
+    .stamp::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1px solid var(--copper-graphic);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .ledger li, .stamp { opacity: 0; }
+      .ledger li { animation: rise 0.5s ease-out forwards; }
+      .ledger li:nth-child(1) { animation-delay: 0.2s; }
+      .ledger li:nth-child(2) { animation-delay: 0.7s; }
+      .ledger li:nth-child(3) { animation-delay: 1.2s; }
+      .stamp { animation: stamp 0.35s cubic-bezier(0.2, 1.4, 0.4, 1) 1.8s forwards; }
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(0.4rem); }
+        to   { opacity: 1; transform: none; }
+      }
+      @keyframes stamp {
+        from { opacity: 0; transform: rotate(-8deg) scale(1.6); }
+        to   { opacity: 1; transform: rotate(-8deg) scale(1); }
+      }
+    }
+
+    section { padding: 3.5rem 0; }
+    h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 2rem;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .demo-stage {
+      background: var(--surface);
+      border: 1px solid var(--territory);
+      display: grid;
+      justify-items: center;
+      gap: 1.4rem;
+      padding: 2.75rem 1.25rem 1.9rem;
+    }
+    .demo-stage .mono-note {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+    .phone {
+      width: min(16.5rem, 100%);
+      border: 2px solid var(--dock);
+      border-radius: 2rem;
+      background: var(--dock);
+      padding: 0.55rem;
+      box-shadow: 0 2px 0 var(--territory);
+    }
+    .p-screen {
+      background: var(--dock);
+      border-radius: 1.5rem;
+      padding: 1.1rem 0.85rem 1.3rem;
+      display: grid;
+      gap: 0.9rem;
+      min-height: 23rem;
+      align-content: start;
+    }
+    .p-clock {
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--paper);
+      text-align: center;
+      letter-spacing: 0.06em;
+      margin-top: 0.4rem;
+    }
+    .p-date {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--nav-inactive);
+      text-align: center;
+      margin-top: -0.6rem;
+    }
+    .p-notif {
+      position: relative;
+      background: var(--surface);
+      border-radius: 0.8rem;
+      padding: 0.8rem 0.85rem 0.9rem;
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.5rem;
+    }
+     
+    .p-notif-head {
+      font-family: var(--mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--copper-text);
+       
+      padding-right: 3.2rem;
+    }
+    .p-notif-body {
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+    .p-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+    .p-btn {
+      flex: 1;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      padding: 0.45rem 0.4rem;
+      border-radius: 0.45rem;
+    }
+    .p-btn.ghost { color: var(--walnut); border: 1px solid var(--walnut); }
+    .p-btn.approve { color: var(--paper); background: var(--dock); border: 1px solid var(--dock); }
+    .p-seal {
+      position: absolute;
+      right: -0.5rem;
+      top: -0.85rem;
+      width: 3.6rem;
+      height: 3.6rem;
+      border-radius: 50%;
+      border: 2px dashed var(--copper-graphic);
+      background: var(--paper);
+      color: var(--copper-text);
+      display: grid;
+      place-content: center;
+      font-family: var(--mono);
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transform: rotate(8deg);
+    }
+    .p-row {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--copper-glow);
+       
+      border-top: 1px dashed var(--nav-inactive);
+      padding-top: 0.8rem;
+      margin-top: 0.4rem;
+      text-align: center;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+       
+      html.js .p-notif, html.js .p-seal, html.js .p-row { opacity: 0; }
+      html.js .demo-stage.play .p-notif {
+        animation: notif-in 0.5s ease-out 0.2s forwards;
+      }
+      html.js .demo-stage.play .p-btn.approve {
+        animation: press 0.3s ease-out 1.7s;
+      }
+      html.js .demo-stage.play .p-seal {
+        animation: stamp-in 0.35s cubic-bezier(0.2, 1.4, 0.4, 1) 2.2s forwards;
+      }
+      html.js .demo-stage.play .p-row {
+        animation: rise 0.5s ease-out 3.1s forwards;
+      }
+      @keyframes notif-in {
+        from { opacity: 0; transform: translateY(-0.6rem); }
+        to   { opacity: 1; transform: none; }
+      }
+      @keyframes press {
+        45% { transform: scale(0.94); background: var(--walnut); }
+      }
+      @keyframes stamp-in {
+        from { opacity: 0; transform: rotate(8deg) scale(1.7); }
+        to   { opacity: 1; transform: rotate(8deg) scale(1); }
+      }
+    }
+
+    .steps {
+      list-style: none;
+      display: grid;
+      gap: 1.4rem;
+      margin-top: 1.75rem;
+    }
+    .steps li {
+      display: grid;
+      grid-template-columns: 2.6rem 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    .step-glyph {
+      display: grid;
+      justify-items: center;
+      gap: 0.35rem;
+      padding-top: 0.2rem;
+    }
+    .step-glyph svg { stroke: var(--copper-graphic); }
+    .step-glyph em {
+      font-style: normal;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--copper-text);
+      border-bottom: 1px solid var(--territory);
+      padding-bottom: 0.15rem;
+    }
+    .steps strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .steps p { color: var(--muted); font-size: 0.95rem; }
+
+    .cta {
+      background: var(--surface);
+      border-top: 1px solid var(--territory);
+      text-align: center;
+    }
+    .cta .seal { margin: 0 auto 1.25rem; }
+    .cta p.lead {
+      max-width: 30rem;
+      margin: 0 auto 2rem;
+      color: var(--muted);
+    }
+     
+    .button {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      padding: 1rem 1.75rem;
+      border: 1px solid var(--ink);
+      min-height: 44px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .button:hover {
+      background: transparent;
+      color: var(--ink);
+    }
+    .cta .fine {
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 3.5rem;
+      background: var(--dock);
+      color: var(--paper);
+      padding-top: 2.75rem;
+      padding-bottom: 2.75rem;
+    }
+    footer .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .f-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .f-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: var(--paper);
+    }
+    .f-sub {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--nav-inactive);
+      margin-top: 0.2rem;
+    }
+    .f-meta {
+      text-align: right;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--nav-inactive);
+      display: grid;
+      gap: 0.25rem;
+    }
+    .f-meta .motto { color: var(--copper-glow); }
+    @media (max-width: 480px) {
+      footer .wrap { flex-direction: column; align-items: flex-start; }
+      .f-meta { text-align: left; }
+    }
+
+    @media (max-width: 480px) {
+      .ledger li { grid-template-columns: 2.9rem 1fr; }
+      .ledger .status { grid-column: 2; }
+      .stamp { bottom: -1.1rem; width: 4.6rem; height: 4.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <a class="wordmark" href="/">
+        
+        <svg class="seal" width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="none" stroke="var(--copper-graphic)" stroke-width="2.5" stroke-dasharray="2.6 2.4" />
+          <circle cx="32" cy="32" r="24" fill="none" stroke="var(--copper-graphic)" stroke-width="1.8" />
+          <text x="32" y="41.5" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="28" fill="var(--ink)">S</text>
+        </svg>
+        <span>SIGNET</span>
+      </a>
+      <span class="byline">a Syahi product</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      
+      <svg class="hero-watermark" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="none" stroke="var(--territory)" stroke-width="0.8" stroke-dasharray="1.3 1.2" />
+        <circle cx="32" cy="32" r="24" fill="none" stroke="var(--territory)" stroke-width="0.5" />
+        <text x="32" y="41.5" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="28" fill="none" stroke="var(--territory)" stroke-width="0.4">S</text>
+      </svg>
+      <p class="eyebrow">The decision ledger for personal AI agents</p>
+      <h1>Agents do the work. <em>You keep the say-so.</em></h1>
+      <p class="lede">
+        Signet runs your agents around the clock — but anything consequential
+        (spending, sending, deleting) stops and waits for your approval on your
+        phone. Every decision is sealed into a ledger you can always read back.
+      </p>
+
+      <div class="ledger" role="img" aria-label="A Signet ledger: an agent requests approval to send three invoice reminders, you approve from your lock screen, the agent sends them, and the decision is sealed on the record.">
+        <div class="ledger-head">
+          <span>Decision ledger</span>
+          <span>today</span>
+        </div>
+        <ol>
+          <li>
+            <span class="t">09:14</span>
+            <span><span class="who">invoice-chaser</span> asks to send 3 payment reminders</span>
+            <span class="status">awaiting your seal</span>
+          </li>
+          <li>
+            <span class="t">09:15</span>
+            <span><span class="who">you</span> approve from the lock screen</span>
+            <span class="status sealed">sealed</span>
+          </li>
+          <li>
+            <span class="t">09:15</span>
+            <span><span class="who">invoice-chaser</span> sends the reminders</span>
+            <span class="status">on the record</span>
+          </li>
+        </ol>
+        <div class="stamp" aria-hidden="true">Sealed<br />by you</div>
+      </div>
+    </div>
+
+    <section aria-labelledby="demo-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">Ninety seconds, one phone screen</p>
+        <h2 id="demo-heading">Watch a decision happen</h2>
+        
+        <div class="demo-stage">
+          
+          <div class="phone" role="img" aria-label="An illustration of a phone lock screen at 09:14. A Signet notification from the agent invoice-chaser asks: send 3 payment reminders to overdue clients? Below Decline and Approve buttons, a copper seal marks it sealed, and a ledger line reads: 09:15, sealed, on the record.">
+            <div class="p-screen">
+              <div class="p-clock">09:14</div>
+              <div class="p-date">Thu · your lock screen</div>
+              <div class="p-notif">
+                <div class="p-notif-head">Signet · invoice-chaser</div>
+                <p class="p-notif-body">Send 3 payment reminders to overdue clients?</p>
+                <div class="p-actions">
+                  <span class="p-btn ghost">Decline</span>
+                  <span class="p-btn approve">Approve</span>
+                </div>
+                <div class="p-seal">Sealed</div>
+              </div>
+              <div class="p-row">09:15 · sealed · on the record</div>
+            </div>
+          </div>
+          <p class="mono-note">Demo film in production — this is the loop it will show</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="how-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">How it works</p>
+        <h2 id="how-heading">Four moments, in order</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-glyph" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><line x1="9.6" y1="8" x2="9.6" y2="16" /><line x1="14.4" y1="8" x2="14.4" y2="16" /></svg>
+              <em>01</em>
+            </span>
+            <div>
+              <strong>An agent reaches a consequential step</strong>
+              <p>Anything that spends money, messages a human, or destroys data pauses instead of proceeding.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-glyph" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 6-2.5 8-2.5 8h17S18 14 18 8" /><path d="M10 20a2.2 2.2 0 0 0 4 0" /></svg>
+              <em>02</em>
+            </span>
+            <div>
+              <strong>Your phone gets the ask</strong>
+              <p>A push notification with exactly what the agent wants to do and why — readable in five seconds.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-glyph" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" stroke-dasharray="2.2 2" /><path d="M8 12.5l2.6 2.6L16 9.5" /></svg>
+              <em>03</em>
+            </span>
+            <div>
+              <strong>You approve or decline</strong>
+              <p>One tap. The agent continues, or it doesn't. No terminal, no dashboard hunt.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-glyph" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="1.5" /><line x1="8" y1="8" x2="16" y2="8" /><line x1="8" y1="12" x2="16" y2="12" /><line x1="8" y1="16" x2="12.5" y2="16" /></svg>
+              <em>04</em>
+            </span>
+            <div>
+              <strong>The decision is sealed</strong>
+              <p>Who asked, what you decided, what happened next — a permanent entry in your ledger.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-heading">
+      <div class="wrap">
+        
+        <svg class="seal" width="40" height="40" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="none" stroke="var(--copper-graphic)" stroke-width="2.5" stroke-dasharray="2.6 2.4" />
+          <circle cx="32" cy="32" r="24" fill="none" stroke="var(--copper-graphic)" stroke-width="1.8" />
+          <text x="32" y="41.5" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="28" fill="var(--ink)">S</text>
+        </svg>
+        <p class="section-eyebrow">Founding users</p>
+        <h2 id="cta-heading">Be one of the first ten</h2>
+        <p class="lead">
+          We're onboarding a small founding cohort by hand — a 30-minute call
+          where we set up your agents and your first approval rules together.
+        </p>
+        
+        <a class="button" href="mailto:hello@syahi.sh?subject=Signet%20founding%20user">Book a 30-min setup call</a>
+        <p class="fine">No payment yet — founding pricing comes later, and founding users set it with us.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="f-brand">
+        
+        <svg class="seal" width="34" height="34" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="none" stroke="var(--copper-glow)" stroke-width="2.5" stroke-dasharray="2.6 2.4" />
+          <circle cx="32" cy="32" r="24" fill="none" stroke="var(--copper-glow)" stroke-width="1.8" />
+          <text x="32" y="41.5" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="28" fill="var(--paper)">S</text>
+        </svg>
+        <div>
+          <div class="f-name">SIGNET</div>
+          <div class="f-sub">a Syahi product</div>
+        </div>
+      </div>
+      <div class="f-meta">
+        <span class="motto">ink · seal · parchment</span>
+        <span>© 2026 Syahi</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+     
+    addEventListener('DOMContentLoaded', function () {
+      var stage = document.querySelector('.demo-stage');
+      if (!stage) return;
+      if (!('IntersectionObserver' in window)) { stage.classList.add('play'); return; }
+       
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            stage.classList.add('play');
+            io.disconnect();
+            return;
+          }
+        }
+      }, { threshold: 0 });
+      io.observe(stage);
+    });
+  </script>
+
+</body>
+</html>
