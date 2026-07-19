@@ -3,12 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Signet — agents do the work, you keep the say-so</title>
+  <title>Signet: agents do the work, you keep the say-so</title>
   <meta name="description" content="Signet is a decision ledger for personal AI agents. Consequential actions wait for your approval on your phone; every decision is sealed into a permanent record." />
 
+  <!-- ============================================================
+       OG / social meta.
+       BRAND-MARK SWAP POINT (#203): the seal used across this page
+       (header/footer/watermark SVGs, the favicon below, and og.png
+       rendered from og-image.html) is a geometric PLACEHOLDER mark.
+       When the real seal lands (issue #203): swap the inline SVGs
+       (search "placeholder-seal"), the favicon data-URI, and
+       regenerate og.png. Nothing else needs to change.
+       ============================================================ -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Signet" />
-  <meta property="og:title" content="Signet — agents do the work, you keep the say-so" />
+  <meta property="og:title" content="Signet: agents do the work, you keep the say-so" />
   <meta property="og:description" content="A decision ledger for personal AI agents. Consequential actions wait for your seal; every decision goes on the record." />
   <meta property="og:url" content="https://signet.syahi.sh/" />
   <meta property="og:image" content="https://signet.syahi.sh/og.png" />
@@ -16,23 +25,47 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="A circular seal mark with a serrated edge and the letter S, above the words: Agents do the work. You keep the say-so. Signet, a decision ledger." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Signet — agents do the work, you keep the say-so" />
+  <meta name="twitter:title" content="Signet: agents do the work, you keep the say-so" />
   <meta name="twitter:description" content="A decision ledger for personal AI agents. Consequential actions wait for your seal; every decision goes on the record." />
   <meta name="twitter:image" content="https://signet.syahi.sh/og.png" />
   <meta name="twitter:image:alt" content="A circular seal mark with a serrated edge and the letter S, above the words: Agents do the work. You keep the say-so. Signet, a decision ledger." />
   <link rel="canonical" href="https://signet.syahi.sh/" />
   <meta name="theme-color" content="#F0E8D2" />
 
+  <!-- Must run before first paint: the demo storyboard's pre-animation
+       hidden states are scoped to html.js, so if this landed after paint
+       the settled storyboard could flash and then blink out. -->
   <script>document.documentElement.classList.add('js');</script>
 
+  <!-- Favicon: placeholder-seal — same swap point as above (#203). -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23221A0E'/%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='%23F0E8D2' stroke-width='2' stroke-dasharray='2.6 2.4'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23F0E8D2' stroke-width='1.5'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='27' fill='%23F0E8D2'%3ES%3C/text%3E%3C/svg%3E" />
 
+  <!-- Loom typefaces: the same trio the Signet PWA loads, but deliberately
+       with heavier weights than the PWA requests — this page sets display
+       sizes the app never does. Not interchangeable with the PWA's load. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" />
 
   <style>
-     
+    /* Loom palette — mirrors pao/web/src/index.css. --copper-text and
+     * --copper-graphic are the WCAG-derived variants of the PWA's raw
+     * copper #BC6A28, which fails 4.5:1 as text on paper — so that token
+     * is deliberately NOT defined here (nothing on this page may use it):
+     * text uses #8A4E1D and graphical marks use #B06325 (see the token
+     * rationale in the PWA stylesheet).
+     *
+     * Dark "dock" surfaces (the footer band, the phone screen) follow the
+     * PWA's dock rules: they use --dock, NOT --ink — the PWA's token
+     * comment is explicit that ink is body text and would invert a dock
+     * surface under a dark theme. Text on dock is --paper (14.06:1),
+     * secondary text is --nav-inactive #A0906E (5.49:1 on dock, the PWA's
+     * measured AA-passing value), and copper accents on dock use
+     * --copper-glow #E8B872 (9.43:1) — never the darkened copper-text,
+     * which FAILS on dark surfaces (2.61:1). All ratios here are measured
+     * against this page's SOLID dock; the PWA's own comments quote lower
+     * figures (8.3:1 / 2.29:1) because its dock is a translucent
+     * bg-dock/95–/97 + backdrop-blur composite. Same conclusions. */
     :root {
       --paper:          #F0E8D2;
       --surface:        #FAF4E2;
@@ -77,6 +110,7 @@
 
     .seal { display: block; }
 
+    /* ---- header ---- */
     header {
       padding: 1.25rem 0;
       border-bottom: 1px solid var(--territory);
@@ -97,7 +131,7 @@
       letter-spacing: 0.35em;
       color: var(--ink);
       text-decoration: none;
-       
+      /* Pad the hit area to ≥44px without moving the visual layout. */
       padding: 0.55rem 0.25rem;
       margin: -0.55rem -0.25rem;
     }
@@ -108,13 +142,21 @@
       color: var(--muted);
     }
 
+    /* ---- hero ---- */
+    /* Longhand on purpose: this element is `class="hero wrap"`, and a
+     * `padding` shorthand here would zero out .wrap's horizontal gutter
+     * (equal specificity, later in source). */
     .hero {
       padding-top: 4.5rem;
       padding-bottom: 3.5rem;
       position: relative;
       overflow: visible;
     }
-     
+    /* Oversized ghost seal behind the headline — pure decoration
+     * (territory-on-paper, aria-hidden). Ink text over it still clears
+     * 4.5:1 by a wide margin (ink on solid territory is 11.77:1, and the
+     * watermark is line-work, not a fill). Hidden below 900px where it
+     * would crowd the text. */
     .hero-watermark {
       position: absolute;
       top: 1.5rem;
@@ -125,7 +167,7 @@
     }
     @media (max-width: 900px) { .hero-watermark { display: none; } }
     .hero > * { position: relative; }
-    .hero-watermark { position: absolute; }  
+    .hero-watermark { position: absolute; } /* re-assert after .hero > * */
     .eyebrow {
       font-family: var(--mono);
       font-size: 0.7rem;
@@ -154,6 +196,9 @@
       font-size: 1.05rem;
     }
 
+    /* ---- ledger vignette ----
+     * A real Signet artifact: three ledger entries, the middle one carrying
+     * the human's seal. Rows reveal in sequence on load; the stamp lands last. */
     .ledger {
       margin: 3rem 0 0;
       background: var(--surface);
@@ -183,7 +228,8 @@
       line-height: 1.5;
     }
     .ledger li + li { border-top: 1px dashed var(--territory); }
-     
+    /* The stamp hangs over the card's bottom-right corner; keep the last
+     * row's status text clear of it. */
     .ledger li:last-child { padding-right: 6rem; }
     .ledger .t { color: var(--muted); }
     .ledger .who { color: var(--walnut); }
@@ -209,7 +255,7 @@
       place-content: center;
       text-align: center;
       font-family: var(--mono);
-      font-size: 0.625rem;  
+      font-size: 0.625rem; /* 10px — the PWA's minimum text size */
       font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -242,6 +288,7 @@
       }
     }
 
+    /* ---- sections ---- */
     section { padding: 3.5rem 0; }
     h2 {
       font-family: var(--serif);
@@ -259,6 +306,20 @@
       margin-bottom: 0.75rem;
     }
 
+    /* ---- demo storyboard ----
+     * DEMO-VIDEO SWAP POINT: the 60–90 s phone-screen demo (GTM step 1.3)
+     * is not recorded yet. Until it is, this stage shows the same loop as
+     * a one-shot animated storyboard on a drawn phone. When the film
+     * exists, replace the whole .demo-stage <div> with a <video> embed,
+     * e.g. <video controls playsinline poster="poster.jpg" src="demo.mp4">.
+     *
+     * Motion notes: the storyboard plays ONCE (total ≈ 3.6 s, under the
+     * WCAG 2.2.2 five-second bar for auto-playing motion, then freezes on
+     * the final state), starts only when scrolled into view (JS adds
+     * .play), is skipped entirely under prefers-reduced-motion, and
+     * renders fully-settled when JS is unavailable — the pre-animation
+     * `opacity: 0` states are scoped to `html.js` so no-JS visitors see
+     * the finished storyboard, never a blank phone. */
     .demo-stage {
       background: var(--surface);
       border: 1px solid var(--territory);
@@ -319,14 +380,19 @@
       display: grid;
       gap: 0.5rem;
     }
-     
+    /* copper-text is correct here and NOT the dock's copper-glow: this
+     * notification card is --surface (light), even though the phone around
+     * it is --dock. If a dark theme is ever added, this is the one rule to
+     * re-check — --surface would flip dark while --copper-text stayed dark
+     * too, landing on the 2.61:1 trap the palette comment above describes. */
     .p-notif-head {
       font-family: var(--mono);
       font-size: 0.625rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--copper-text);
-       
+      /* The seal hangs over the card's top-right corner; keep the header
+       * line clear of it. */
       padding-right: 3.2rem;
     }
     .p-notif-body {
@@ -374,14 +440,16 @@
       font-size: 0.7rem;
       letter-spacing: 0.06em;
       color: var(--copper-glow);
-       
+      /* --nav-inactive, not --walnut: walnut on dock is 2.02:1 and the
+       * rule all but disappears. */
       border-top: 1px dashed var(--nav-inactive);
       padding-top: 0.8rem;
       margin-top: 0.4rem;
       text-align: center;
     }
     @media (prefers-reduced-motion: no-preference) {
-       
+      /* Hidden-then-animated is gated on html.js: without JS these rules
+       * never apply and the storyboard renders settled. */
       html.js .p-notif, html.js .p-seal, html.js .p-row { opacity: 0; }
       html.js .demo-stage.play .p-notif {
         animation: notif-in 0.5s ease-out 0.2s forwards;
@@ -408,6 +476,7 @@
       }
     }
 
+    /* ---- how it works ---- */
     .steps {
       list-style: none;
       display: grid;
@@ -443,6 +512,7 @@
     }
     .steps p { color: var(--muted); font-size: 0.95rem; }
 
+    /* ---- CTA ---- */
     .cta {
       background: var(--surface);
       border-top: 1px solid var(--territory);
@@ -454,7 +524,13 @@
       margin: 0 auto 2rem;
       color: var(--muted);
     }
-     
+    /* Inverting primary button: deliberately --ink, NOT --dock. This is the
+     * one dark-looking surface that SHOULD flip with the theme — see the
+     * :hover rule below, which uses --ink as text — whereas the footer band
+     * and the phone must stay dark unconditionally, which is what --dock is
+     * for. 14.06:1 in loom, and it sidesteps the copper-on-paper text
+     * pitfalls entirely. (Not the PWA's own primary Button, which is a
+     * copper-outline treatment — see components/Button.tsx.) */
     .button {
       display: inline-block;
       background: var(--ink);
@@ -481,6 +557,7 @@
       color: var(--muted);
     }
 
+    /* ---- footer: the dock band ---- */
     footer {
       margin-top: 3.5rem;
       background: var(--dock);
@@ -541,7 +618,7 @@
   <header>
     <div class="wrap">
       <a class="wordmark" href="/">
-        
+        <!-- placeholder-seal (#203): header mark -->
         <svg class="seal" width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="32" cy="32" r="30" fill="none" stroke="var(--copper-graphic)" stroke-width="2.5" stroke-dasharray="2.6 2.4" />
           <circle cx="32" cy="32" r="24" fill="none" stroke="var(--copper-graphic)" stroke-width="1.8" />
@@ -555,7 +632,7 @@
 
   <main>
     <div class="hero wrap">
-      
+      <!-- placeholder-seal (#203): decorative ghost watermark -->
       <svg class="hero-watermark" viewBox="0 0 64 64" aria-hidden="true">
         <circle cx="32" cy="32" r="30" fill="none" stroke="var(--territory)" stroke-width="0.8" stroke-dasharray="1.3 1.2" />
         <circle cx="32" cy="32" r="24" fill="none" stroke="var(--territory)" stroke-width="0.5" />
@@ -564,7 +641,7 @@
       <p class="eyebrow">The decision ledger for personal AI agents</p>
       <h1>Agents do the work. <em>You keep the say-so.</em></h1>
       <p class="lede">
-        Signet runs your agents around the clock — but anything consequential
+        Signet runs your agents around the clock. Anything consequential
         (spending, sending, deleting) stops and waits for your approval on your
         phone. Every decision is sealed into a ledger you can always read back.
       </p>
@@ -599,9 +676,13 @@
       <div class="wrap">
         <p class="section-eyebrow">Ninety seconds, one phone screen</p>
         <h2 id="demo-heading">Watch a decision happen</h2>
-        
+        <!-- DEMO-VIDEO SWAP POINT: replace this .demo-stage <div> with the
+             real <video> embed once the demo is recorded (GTM step 1.3). -->
         <div class="demo-stage">
-          
+          <!-- role="img" belongs on the drawing itself, NOT on .demo-stage:
+               it makes its whole subtree presentational, which would drop
+               the .mono-note caption below — the one element that discloses
+               this is a stand-in, not the real demo. -->
           <div class="phone" role="img" aria-label="An illustration of a phone lock screen at 09:14. A Signet notification from the agent invoice-chaser asks: send 3 payment reminders to overdue clients? Below Decline and Approve buttons, a copper seal marks it sealed, and a ledger line reads: 09:15, sealed, on the record.">
             <div class="p-screen">
               <div class="p-clock">09:14</div>
@@ -618,7 +699,7 @@
               <div class="p-row">09:15 · sealed · on the record</div>
             </div>
           </div>
-          <p class="mono-note">Demo film in production — this is the loop it will show</p>
+          <p class="mono-note">Demo film in production. This is the loop it will show</p>
         </div>
       </div>
     </section>
@@ -645,7 +726,7 @@
             </span>
             <div>
               <strong>Your phone gets the ask</strong>
-              <p>A push notification with exactly what the agent wants to do and why — readable in five seconds.</p>
+              <p>A push notification with exactly what the agent wants to do and why, readable in five seconds.</p>
             </div>
           </li>
           <li>
@@ -665,7 +746,7 @@
             </span>
             <div>
               <strong>The decision is sealed</strong>
-              <p>Who asked, what you decided, what happened next — a permanent entry in your ledger.</p>
+              <p>Who asked, what you decided, what happened next. A permanent entry in your ledger.</p>
             </div>
           </li>
         </ol>
@@ -674,7 +755,7 @@
 
     <section class="cta" aria-labelledby="cta-heading">
       <div class="wrap">
-        
+        <!-- placeholder-seal (#203): CTA mark -->
         <svg class="seal" width="40" height="40" viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="32" cy="32" r="30" fill="none" stroke="var(--copper-graphic)" stroke-width="2.5" stroke-dasharray="2.6 2.4" />
           <circle cx="32" cy="32" r="24" fill="none" stroke="var(--copper-graphic)" stroke-width="1.8" />
@@ -683,12 +764,16 @@
         <p class="section-eyebrow">Founding users</p>
         <h2 id="cta-heading">Be one of the first ten</h2>
         <p class="lead">
-          We're onboarding a small founding cohort by hand — a 30-minute call
+          We're onboarding a small founding cohort by hand: a 30-minute call
           where we set up your agents and your first approval rules together.
         </p>
-        
-        <a class="button" href="mailto:hello@syahi.sh?subject=Signet%20founding%20user">Book a 30-min setup call</a>
-        <p class="fine">No payment yet — founding pricing comes later, and founding users set it with us.</p>
+        <!-- BOOKING-LINK SWAP POINT: replace the mailto below with the
+             Cal.com "founding user setup call" event URL once it exists
+             (GTM step 1.5). The address is the role mailbox hello@syahi.sh
+             (Porkbun forwarding → the maintainer's inbox), not a personal
+             address — see the README's booking-link note. -->
+        <a class="button" href="https://cal.com/surabhipradhan/25-min-research-chat">Book a call with the founder</a>
+        <p class="fine">Founding users pay from day one: $15 to $25 a month, locked for life, set with the first ten. If it is not worth $15 to you, we want to know why.</p>
       </div>
     </section>
   </main>
@@ -696,7 +781,7 @@
   <footer>
     <div class="wrap">
       <div class="f-brand">
-        
+        <!-- placeholder-seal (#203): footer mark, paper-on-ink -->
         <svg class="seal" width="34" height="34" viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="32" cy="32" r="30" fill="none" stroke="var(--copper-glow)" stroke-width="2.5" stroke-dasharray="2.6 2.4" />
           <circle cx="32" cy="32" r="24" fill="none" stroke="var(--copper-glow)" stroke-width="1.8" />
@@ -715,12 +800,16 @@
   </footer>
 
   <script>
-     
+    /* Starts the demo storyboard when it scrolls into view. All hidden
+     * pre-animation states are scoped to html.js (added in <head>), so if
+     * this script never runs the storyboard simply renders settled. */
     addEventListener('DOMContentLoaded', function () {
       var stage = document.querySelector('.demo-stage');
       if (!stage) return;
       if (!('IntersectionObserver' in window)) { stage.classList.add('play'); return; }
-       
+      /* threshold 0: any intersection starts it. A fractional threshold
+       * can never be reached if the stage ever grows taller than the
+       * viewport, which would leave the phone permanently blank. */
       var io = new IntersectionObserver(function (entries) {
         for (var i = 0; i < entries.length; i++) {
           if (entries[i].isIntersecting) {
