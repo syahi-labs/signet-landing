@@ -764,15 +764,20 @@
         <p class="section-eyebrow">Founding users</p>
         <h2 id="cta-heading">Be one of the first ten</h2>
         <p class="lead">
-          We're onboarding a small founding cohort by hand: a 30-minute call
-          where we set up your agents and your first approval rules together.
+          We're onboarding a small founding cohort by hand. Grab 25 minutes and
+          walk us through the decisions you'd actually hand to an agent, no
+          setup required, just your take.
         </p>
-        <!-- BOOKING-LINK SWAP POINT: replace the mailto below with the
-             Cal.com "founding user setup call" event URL once it exists
-             (GTM step 1.5). The address is the role mailbox hello@syahi.sh
-             (Porkbun forwarding → the maintainer's inbox), not a personal
-             address — see the README's booking-link note. -->
-        <a class="button" href="https://cal.com/surabhipradhan/25-min-research-chat">Book a call with the founder</a>
+        <!-- BOOKING-LINK: the "Research Chat" Cal.com event (25 min, GTM 1.5).
+             Keep the button copy, the "25 minutes" in the lead above, and the
+             event's name/duration on Cal.com in sync so the page framing and
+             the booking page a visitor lands on match. Opens in a new tab so
+             the landing page isn't lost. rel="noopener" only, deliberately no
+             noreferrer: noopener closes the tabnabbing hole while the referrer
+             is left intact so Cal.com can attribute the booking to
+             signet.syahi.sh. aria-label announces the new tab (WCAG G201)
+             while keeping the visible text for voice control. -->
+        <a class="button" href="https://cal.com/surabhipradhan/25-min-research-chat?overlayCalendar=true" target="_blank" rel="noopener" aria-label="Book a 25-min chat (opens in a new tab)">Book a 25-min chat</a>
         <p class="fine">Founding users pay from day one: $15 to $25 a month, locked for life, set with the first ten. If it is not worth $15 to you, we want to know why.</p>
       </div>
     </section>
