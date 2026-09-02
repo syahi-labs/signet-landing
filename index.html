@@ -513,13 +513,15 @@
           </g>
         </g>
       </svg>
-      <p class="eyebrow">Live inside Syahi since August 31, 2026</p>
-      <h1>Your agent drafts the reply. <em>You see every word. Then it sends.</em></h1>
+      <p class="eyebrow">The approval method behind it has run Syahi's own outbound since August 31, 2026</p>
+      <h1>What you approved is <em>what goes out.</em></h1>
       <p class="lede">
-        Signet sits between your agents and your customers. Anything client-facing
-        waits on your phone until you've verifiably seen it. <strong>Nothing sends
-        that you didn't verifiably see.</strong> Veto is one tap and it always wins.
-        A freeze button stops everything, from your phone, in one motion.
+        Your agent drafts the reply. You see every word on your phone. Then it
+        sends. Signet sits between your agents and your customers: anything
+        client-facing waits until you've verifiably seen it. <strong>Nothing
+        sends that you didn't verifiably see.</strong> Veto is one tap and it
+        always wins. A freeze button stops everything, from your phone, in one
+        motion.
       </p>
 
       <div class="ledger" role="img" aria-label="A Signet ledger: an agent drafts a quote reply to a customer named Meena, the exact wording shows on the owner's phone, she approves from her phone, the agent sends it, and the decision is sealed on the record.">
@@ -587,14 +589,95 @@
       </div>
     </section>
 
+    <style>
+      .pair-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;margin-top:36px}
+      .pair-card{border:1.5px solid var(--ink);padding:26px 24px;position:relative}
+      .pair-card.dim{border-color:color-mix(in srgb, var(--ink) 35%, transparent)}
+      .pair-tag{
+        font-family:var(--mono,ui-monospace),monospace;font-size:11px;letter-spacing:.24em;
+        text-transform:uppercase;margin-bottom:18px;display:block;opacity:.65;
+      }
+      .notif{
+        border:1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+        border-radius:14px;padding:14px 16px;max-width:340px;
+        font-size:14px;line-height:1.5;
+      }
+      .notif .n-head{display:flex;gap:8px;align-items:center;margin-bottom:6px;opacity:.7;font-size:12px}
+      .notif .n-dot{width:14px;height:14px;border-radius:4px;background:color-mix(in srgb, var(--ink) 45%, transparent)}
+      .notif .n-btns{display:flex;gap:10px;margin-top:12px}
+      .notif .n-btns span{
+        border:1px solid color-mix(in srgb, var(--ink) 35%, transparent);
+        border-radius:8px;padding:4px 14px;font-size:13px;
+      }
+      .detail{
+        border:1px solid var(--ink);border-radius:6px;padding:16px 18px;max-width:400px;
+        font-size:14px;line-height:1.55;
+      }
+      .detail .d-row{display:flex;gap:10px}
+      .detail .d-k{font-family:var(--mono,ui-monospace),monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6;width:56px;flex:none;padding-top:2px}
+      .detail .d-draft{margin:10px 0;padding:10px 12px;border-left:2.5px solid var(--ink);font-style:italic}
+      .detail .d-hash{font-family:var(--mono,ui-monospace),monospace;font-size:11.5px;opacity:.65;margin-top:8px}
+      .detail .d-approve{
+        display:inline-block;margin-top:12px;border:1.5px solid var(--ink);border-radius:8px;
+        padding:5px 16px;font-size:13px;font-weight:600;
+      }
+      .pair-caption{margin-top:22px;font-size:16px}
+      .slots{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:36px}
+      .slot{
+        border:1.5px dashed color-mix(in srgb, var(--ink) 40%, transparent);
+        padding:26px 24px;font-size:14.5px;line-height:1.6;
+      }
+      .slot .slot-tag{
+        font-family:var(--mono,ui-monospace),monospace;font-size:11px;letter-spacing:.24em;
+        text-transform:uppercase;display:block;margin-bottom:12px;opacity:.65;
+      }
+      .slot .slot-counts{font-family:var(--mono,ui-monospace),monospace;font-size:13px;margin-top:10px;opacity:.75}
+      @media(max-width:720px){.pair-grid,.slots{grid-template-columns:1fr}}
+    </style>
+
+    <section aria-labelledby="pair-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">How it's different</p>
+        <h2 id="pair-heading">One of these is a decision. The other is a reflex.</h2>
+        <div class="pair-grid">
+          <div class="pair-card dim">
+            <span class="pair-tag">Every other approval tool</span>
+            <div class="notif" role="img" aria-label="A generic phone notification that says an agent wants to send one email, with approve and deny buttons and no way to see the email itself.">
+              <div class="n-head"><span class="n-dot"></span><span>Agent · now</span></div>
+              <strong>Agent wants to send 1 email</strong>
+              <div class="n-btns"><span>Approve</span><span>Deny</span></div>
+            </div>
+            <p class="pair-caption">You approved a sentence about the draft.
+            The draft itself? Never saw it. That tap is a reflex, and a ledger
+            full of reflexes proves nothing.</p>
+          </div>
+          <div class="pair-card">
+            <span class="pair-tag">Signet</span>
+            <div class="detail" role="img" aria-label="Signet's detail view: the recipient, the subject, the full draft text, the content hash it will be sealed over, and an approve button.">
+              <div class="d-row"><span class="d-k">To</span><span>meena@sharmafurnishings.in</span></div>
+              <div class="d-row"><span class="d-k">Subject</span><span>Re: quote for the 3BHK</span></div>
+              <div class="d-draft">"Hi Meena, quote attached, valid till Friday.
+              The laminate option came in lower than we discussed&hellip;"</div>
+              <div class="d-hash">seals over these exact bytes · a1b2c3d4e5f60718</div>
+              <span class="d-approve">Approve</span>
+            </div>
+            <p class="pair-caption">You read the words that will actually leave.
+            Your approval is sealed over those bytes, and changing one byte kills
+            it. That tap is a decision.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="proof" aria-labelledby="proof-heading">
       <div class="wrap">
         <p class="section-eyebrow">Not a demo film. A real run.</p>
         <h2 id="proof-heading">We ran the battery on ourselves first</h2>
         <p class="section-lead">
-          Syahi's own outbound runs through Signet. On August 31, 2026, we put it
-          through a live battery against our own production system, on the phone,
-          with real releases on the clock. Here's what happened, told straight.
+          Signet productizes the approval system Syahi already runs on its own
+          outbound. On August 31, 2026, we put that system through a live battery
+          against our own production releases, on the phone, with real clocks.
+          Here's what happened, told straight.
         </p>
 
         <ul class="receipts">
@@ -605,8 +688,8 @@
             </div>
             <p class="receipt-body">
               A draft's content changed after the founder had already looked at it.
-              The old approval died on the spot; Signet didn't let the changed text
-              ride on a stale seal. It re-flagged the item as new and made her look
+              The old approval died on the spot; the system didn't let the changed
+              text ride on a stale seal. It re-flagged the item as new and made her look
               again. She vetoed it. This is what content-pinning means in practice:
               you approve the exact bytes, not a label that says "email sent."
             </p>
@@ -648,10 +731,31 @@
 
         <p class="proof-note">
           <strong>Two other drafts never made it to her phone at all.</strong>
-          Signet's own checks refused them first: one recipient wasn't on the
+          The system's own checks refused them first: one recipient wasn't on the
           approved list, one body had drifted off template. Caught before they
           became her problem, not after.
         </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="slots-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">Promised only when true</p>
+        <h2 id="slots-heading">Two things this page refuses to fake</h2>
+        <div class="slots">
+          <div class="slot">
+            <span class="slot-tag">The demo</span>
+            The live screen capture lands here the day Syahi's own approvals run
+            on the product itself. Not a mock, not a film, not before. If this
+            box is empty, that day hasn't come yet.
+          </div>
+          <div class="slot">
+            <span class="slot-tag">The ledger, counted</span>
+            Decisions held, approved and vetoed will be counted here from the
+            live ledger once real decisions flow through it.
+            <div class="slot-counts">held ____ · approved ____ · vetoed ____</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -711,9 +815,10 @@
         <p class="section-eyebrow">Request a demo</p>
         <h2 id="cta-heading">See it happen on your own draft</h2>
         <p class="lead">
-          Signet runs live inside Syahi today. It isn't open to outside customers
-          yet. Book 25 minutes, bring a real email or quote you'd hand an agent,
-          and we'll show you the actual ledger, not a slide.
+          The method runs Syahi today. The product is being built in the open,
+          and it isn't open to outside customers yet. Book 25 minutes, bring a
+          real email or quote you'd hand an agent, and we'll show you the actual
+          ledger, not a slide.
         </p>
         <a class="button" href="https://cal.com/surabhipradhan/25-min-research-chat?overlayCalendar=true" target="_blank" rel="noopener" aria-label="Book a 25-min demo (opens in a new tab)">Book a 25-min demo</a>
         <p class="fine">Just a conversation for now. No checkout, no commitment.</p>
