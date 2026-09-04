@@ -632,6 +632,17 @@
         text-transform:uppercase;display:block;margin-bottom:12px;opacity:.65;
       }
       .slot .slot-counts{font-family:var(--mono,ui-monospace),monospace;font-size:13px;margin-top:10px;opacity:.75}
+      .outward-sample{
+        max-width:34rem;margin-top:28px;background:var(--surface);
+        border:1px solid var(--territory);padding:22px 24px;
+      }
+      .outward-msg{color:var(--muted);font-size:14.5px;line-height:1.6}
+      .outward-sample .outward-footer{
+        font-family:var(--mono,ui-monospace),monospace;font-size:12.5px;line-height:1.6;
+        color:var(--copper-text);border-top:1px dashed var(--territory);
+        margin-top:14px;padding-top:14px;overflow-wrap:anywhere;
+      }
+      .outward-note{margin-top:18px;font-size:14px;color:var(--muted);max-width:36rem}
       @media(max-width:720px){.pair-grid,.slots{grid-template-columns:1fr}}
     </style>
 
@@ -734,6 +745,35 @@
           The system's own checks refused them first: one recipient wasn't on the
           approved list, one body had drifted off template. Caught before they
           became her problem, not after.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="outward-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">Sealed by Signet</p>
+        <h2 id="outward-heading">The seal can travel with the message</h2>
+        <p class="section-lead">
+          Every approved send already mints a signed certificate. Opt a draft
+          class in, and the send carries it outward: one footer line whose link
+          opens a public verification page. The recipient sees who approved
+          this exact message and when, checked against the signature in their
+          own browser. No account, no trust-us.
+        </p>
+        <div
+          class="outward-sample"
+          role="img"
+          aria-label="The tail of a received email. After the sign-off, a footer reads: Reviewed and approved by you on 2026-09-03 — verify: signet.syahi.sh/s/cmd_9f2…"
+        >
+          <p class="outward-msg">…so the three overdue invoices are attached
+          again for convenience. Best regards, invoice-chaser</p>
+          <p class="outward-footer">Reviewed and approved by you on 2026-09-03
+          — verify: signet.syahi.sh/s/cmd_9f2…</p>
+        </div>
+        <p class="outward-note">
+          Off by default, opted in per draft class. And the guarantee runs the
+          other way too: a rejected or unverified send can never carry the
+          footer — it is appended only after the certificate verifies.
         </p>
       </div>
     </section>
