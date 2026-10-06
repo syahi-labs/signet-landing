@@ -4,22 +4,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Signet by Syahi: nothing sends that you didn't verifiably see</title>
-  <meta name="description" content="Signet by Syahi is the decision ledger for personal AI agents. Your agent drafts, you approve on your phone, and what you approved is what goes out." />
+  <meta name="description" content="Signet by Syahi is the decision ledger for AI that talks to your customers. Your agent drafts, you approve on your phone, and that's exactly what goes out." />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Signet by Syahi" />
-  <meta property="og:title" content="Signet by Syahi: the decision ledger for personal AI agents" />
-  <meta property="og:description" content="The decision ledger for personal AI agents. Your agent drafts, you see the exact words, one tap approves. Veto always wins. Every decision leaves a receipt." />
+  <meta property="og:title" content="Signet by Syahi: the decision ledger for AI that talks to your customers" />
+  <meta property="og:description" content="The decision ledger for AI that talks to your customers. Your agent drafts, you see the exact words, one tap approves. Veto always wins. Every decision leaves a receipt." />
   <meta property="og:url" content="https://signet.syahi.sh/" />
   <meta property="og:image" content="https://signet.syahi.sh/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="A circular seal mark with a serrated edge and the letter S, above the words: Nothing sends that you didn't verifiably see. Signet by Syahi, the decision ledger for personal AI agents." />
+  <meta property="og:image:alt" content="The Signet seal above the words: Agents do the work. You keep the say-so. Signet by Syahi, a decision ledger." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Signet by Syahi: the decision ledger for personal AI agents" />
-  <meta name="twitter:description" content="The decision ledger for personal AI agents. Your agent drafts, you see the exact words, one tap approves. Veto always wins. Every decision leaves a receipt." />
+  <meta name="twitter:title" content="Signet by Syahi: the decision ledger for AI that talks to your customers" />
+  <meta name="twitter:description" content="The decision ledger for AI that talks to your customers. Your agent drafts, you see the exact words, one tap approves. Veto always wins. Every decision leaves a receipt." />
   <meta name="twitter:image" content="https://signet.syahi.sh/og.png" />
-  <meta name="twitter:image:alt" content="A circular seal mark with a serrated edge and the letter S, above the words: Nothing sends that you didn't verifiably see. Signet by Syahi, the decision ledger for personal AI agents." />
+  <meta name="twitter:image:alt" content="The Signet seal above the words: Agents do the work. You keep the say-so. Signet by Syahi, a decision ledger." />
   <link rel="canonical" href="https://signet.syahi.sh/" />
   <meta name="theme-color" content="#F0E8D2" />
 
@@ -457,6 +457,22 @@
       gap: 0.25rem;
     }
     .f-meta .motto { color: var(--copper-glow); }
+    .f-links {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+    }
+    .f-links a {
+      color: var(--nav-inactive);
+      text-decoration: none;
+      padding: 0.35rem 0;
+    }
+    .f-links a:hover { color: var(--paper); text-decoration: underline; }
+    footer .f-links a:focus-visible { outline-color: var(--copper-glow); }
     @media (max-width: 480px) {
       footer .wrap { flex-direction: column; align-items: flex-start; }
       .f-meta { text-align: left; }
@@ -631,7 +647,6 @@
         font-family:var(--mono,ui-monospace),monospace;font-size:11px;letter-spacing:.24em;
         text-transform:uppercase;display:block;margin-bottom:12px;opacity:.65;
       }
-      .slot .slot-counts{font-family:var(--mono,ui-monospace),monospace;font-size:13px;margin-top:10px;opacity:.75}
       .outward-sample{
         max-width:34rem;margin-top:28px;background:var(--surface);
         border:1px solid var(--territory);padding:22px 24px;
@@ -665,7 +680,7 @@
           <div class="pair-card">
             <span class="pair-tag">Signet</span>
             <div class="detail" role="img" aria-label="Signet's detail view: the recipient, the subject, the full draft text, the content hash it will be sealed over, and an approve button.">
-              <div class="d-row"><span class="d-k">To</span><span>meena@sharmafurnishings.in</span></div>
+              <div class="d-row"><span class="d-k">To</span><span>meena@sharma-furnishings.example</span></div>
               <div class="d-row"><span class="d-k">Subject</span><span>Re: quote for the 3BHK</span></div>
               <div class="d-draft">"Hi Meena, quote attached, valid till Friday.
               The laminate option came in lower than we discussed&hellip;"</div>
@@ -763,17 +778,17 @@
         <div
           class="outward-sample"
           role="img"
-          aria-label="The tail of a received email. After the sign-off, a footer reads: Reviewed and approved by you on 2026-09-03 — verify: signet.syahi.sh/s/cmd_9f2…"
+          aria-label="The tail of a received email. After the sign-off, a footer reads: Reviewed and approved by you on 2026-09-03. Verify: approve.syahi.sh/s/cmd_9f2…"
         >
           <p class="outward-msg">…so the three overdue invoices are attached
           again for convenience. Best regards, invoice-chaser</p>
-          <p class="outward-footer">Reviewed and approved by you on 2026-09-03
-          — verify: signet.syahi.sh/s/cmd_9f2…</p>
+          <p class="outward-footer">Reviewed and approved by you on 2026-09-03.
+          Verify: approve.syahi.sh/s/cmd_9f2…</p>
         </div>
         <p class="outward-note">
           Off by default, opted in per draft class. And the guarantee runs the
           other way too: a rejected or unverified send can never carry the
-          footer — it is appended only after the certificate verifies.
+          footer. It's appended only after the certificate verifies.
         </p>
       </div>
     </section>
@@ -793,7 +808,6 @@
             <span class="slot-tag">The ledger, counted</span>
             Decisions held, approved and vetoed will be counted here from the
             live ledger once real decisions flow through it.
-            <div class="slot-counts">held ____ · approved ____ · vetoed ____</div>
           </div>
         </div>
       </div>
@@ -856,11 +870,11 @@
         <h2 id="cta-heading">See it happen on your own draft</h2>
         <p class="lead">
           The method runs Syahi today. The product is being built in the open,
-          and it isn't open to outside customers yet. Book 25 minutes, bring a
+          and it isn't open to outside customers yet. Book 30 minutes, bring a
           real email or quote you'd hand an agent, and we'll show you the actual
           ledger, not a slide.
         </p>
-        <a class="button" href="https://cal.com/surabhipradhan/25-min-research-chat?overlayCalendar=true" target="_blank" rel="noopener" aria-label="Book a 25-min demo (opens in a new tab)">Book a 25-min demo</a>
+        <a class="button" href="https://cal.com/surabhipradhan/30-mins-discussion-about-syahi?overlayCalendar=true" target="_blank" rel="noopener" aria-label="Book a 30-minute demo (opens in a new tab)">Book a 30-minute demo</a>
         <p class="fine">Just a conversation for now. No checkout, no commitment.</p>
       </div>
     </section>
@@ -897,6 +911,13 @@
         <span class="motto">ink &middot; seal &middot; parchment</span>
         <span>&copy; 2026 Syahi</span>
       </div>
+      <nav class="f-links" aria-label="Syahi">
+        <a href="https://syahi.sh/">Syahi</a>
+        <a href="https://syahi.sh/contact">Contact</a>
+        <a href="https://syahi.sh/privacy">Privacy</a>
+        <a href="https://syahi.sh/terms">Terms</a>
+        <a href="https://syahi.sh/refund">Refunds</a>
+      </nav>
     </div>
   </footer>
 
